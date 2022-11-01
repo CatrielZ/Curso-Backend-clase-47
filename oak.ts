@@ -1,4 +1,7 @@
 import { Application, Router, Context } from "https://deno.land/x/oak/mod.ts";
+import { bgGreen, bgRed, bgWhite, bgYellow, blue, brightGreen, brightRed, brightYellow, green, white, yellow, red } from "https://deno.land/std@0.152.0/fmt/colors.ts";
+
+
 
 const numeros =  [4,5,33,7,94,56];
 
@@ -10,18 +13,20 @@ const minimo = () => {
   const NumMin= Math.min(...numeros);
   return NumMin;
 }
-console.log(minimo());
+
 
 const promedio = () => {
-  let total = 0;
+  let sumatoria = numeros.reduce(function(a, b){
+    return a + b;
+  }, 0);
 
-  for(let i = 0; i <= numeros.length; i++) {
-
-  }
-
-
+  let promedio = sumatoria / numeros.length;
+  return promedio;
 }
-console.log(promedio())
+console.log(bgWhite(blue("Numeros " + numeros)))
+console.log(bgWhite(brightYellow(yellow("Mínimo: " + minimo()))))
+console.log(bgWhite(brightRed(red("Maximo: " + maximo()))))
+console.log(bgWhite(brightGreen(green("Promedio: " + promedio()))))
 
 const app = new Application();
 const router = new Router();
@@ -38,8 +43,9 @@ router.get("/hola", (ctx: Context) => {
     <head><title>Hello oak!</title><head>
     <body>
       <h1 style="color: blue;">Numeros:${numeros}</h1>
-      <h1 style="color: blue> Maximo : ${maximo()} </h1>
-      <h1> Minimo : ${minimo()} </h1>
+      <h1 style="color: red;> Maximo : ${maximo()} </h1>
+      <h1 style="color: yellow;> Minimo : ${minimo()} </h1>
+      <h1 style="color: green;> Promedio : ${promedio()} </h1>
       
     </body>
   </html>
